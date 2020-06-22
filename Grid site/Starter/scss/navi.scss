@@ -1,0 +1,156 @@
+.navigation {
+  
+    &_checkbox {
+        display: none;
+    }
+    &_button {
+        background-color: #fff;
+        height: 7rem;
+        width: 7rem;
+        position: fixed;
+        top: 5.5rem;
+        right: 4rem;
+        border-radius: 50%;
+        z-index: 71 ;
+        box-shadow: 0 1rem 3rem rgba(#333, .6);
+        cursor: pointer;
+        border: 1.5px solid #fff;
+
+        // to jest po to żeby burger był na środku
+        text-align: center;
+        transition: all .2s;
+        &:hover {
+            box-shadow: none;
+            background: #333;
+            transform: translateY(-3px);
+        }
+    }
+    &_background {
+        width: 6rem;
+        height: 6rem;
+        border-radius: 50%;
+        position: fixed;
+        top: 6rem;
+        right: 4.5rem;
+        background-image: radial-gradient(#7ed56f,rgb(35, 92, 18));
+        z-index: 69;
+        // Ważna rzecz. To sprawia, że małe kółeczko będzie wielkie na całe tło po kliknięciu
+        // na button.
+
+        // TO BĘDZIE W HOVER!
+        // transform: scale(100);
+
+        // cubic jest fajnym efektem
+        transition: transform .6s cubic-bezier(0.83, 0, 0.17, 1);
+    }
+    &_nav {
+        height: 100vh;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: -50%;
+        z-index: 70;
+
+        // to sprawi, że nav zniknie
+        opacity: 0;
+        width: 0;
+
+        // cubic sprawi, że nav poleci minimalnie poza top co da fajny efekt
+        transition: all .6s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+    }
+    &_list {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(0, -50%);
+        list-style-type: none;
+        text-align: center;
+        
+        // musi być 100% żeby nie wychodziło poza ekran przy hover. Tak jest zwyczajnie lepiej
+        width: 100%;
+    }
+    &_item {
+        margin: 1rem;
+    }
+    &_link {
+       &:link,
+       &:visited {
+        // display inline block musi być żeby zadziałał transform w hover
+        display: inline-block; 
+        text-decoration: none;
+        font-size: 3rem;
+        font-weight: 300;
+       
+        padding: 1rem 2rem;
+        text-transform: uppercase;
+        color: #fff;
+
+        // efekt na linku
+        background-image: linear-gradient(120deg, transparent 0%, transparent 50%, #fff 50%);
+        background-size: 221%;
+
+        transition: all .3s;
+       }
+      
+       &:hover,
+       &:active {
+           display: inline-block; 
+           background-position: 100%;
+           color: rgb(35, 92, 18);
+           transform: translateX(1rem);
+       }
+    }
+
+    // To sprawi, że po kliku na checkbox tło się powiększy na cały ekran :D 
+    &_checkbox:checked ~ &_background {
+        transform: scale(80);
+    }
+    &_checkbox:checked ~ &_nav {
+        opacity: 1;
+        width: 100%;
+    }
+
+    // to jest burger
+
+    &_icon {
+        position: relative;
+        margin-top: 3.3rem;
+        &,
+        &::before,
+        &::after {
+            // musi być inline block
+            display: inline-block;
+            width: 3rem;
+            height: 2px;
+            background-color: #333;
+            transition: all .2s;
+        }
+        &::before,
+        &::after  {
+            content: "";
+            position: absolute;
+            left: 0;
+        }
+        &::before{top: -.8rem;}
+        &::after{top: .8rem;}
+    }
+    // to są efekty dla burgera :)
+    &_button:hover  &_icon:before {background-color: #fff;}    
+    &_button:hover   &_icon:after {background-color: #fff;}
+    &_button:hover   &_icon  {background-color: #fff;}
+
+    // to sprawi, że główny element burgera znika
+    &_checkbox:checked + &_button &_icon {
+        background-color: transparent;
+    }
+
+    // a to sprawi, że burger(after i before) zamieni się w X
+    &_checkbox:checked + &_button &_icon::before {
+        transform: rotate(135deg);
+        top: 0;
+    }
+    &_checkbox:checked + &_button &_icon::after {
+        transform: rotate(-135deg);
+        top: 0;
+    }
+}

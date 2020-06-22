@@ -1,0 +1,47 @@
+//colors
+$color-secondary: #13161a;
+
+$bp-largest: 90em; //media
+$bp-large: 65em; //1000px
+$bp-medium: 45em; //800px
+$bp-small: 37.5em; //600px
+
+
+
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+  @media only screen and (max-width: $bp-largest) {
+    font-size: 50%;
+}
+}
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+.container {
+  display: grid;
+  grid-template-rows: 0 70vh repeat(4, min-content);
+  grid-template-columns: [full-start]1fr[center-start] repeat(8, [col-start] minmax(min-content, 21rem) [col-end])[center-end] 1fr[full-end];
+  font-size: 1.8rem;
+  color: #fff;
+  font-weight: 300;
+
+  p {
+    font-size: 2rem;
+  }
+  h1 {
+    font-size: 5.5rem;
+  }
+  h3 {
+    font-size: 3rem;  }
+  }
+
